@@ -13,4 +13,9 @@ public class Demo {
         return "Hello World";
     }
 
+    @GetMapping("/dtl")
+    public String hello() {
+        return "Hello Long";
+    }
+
 }
