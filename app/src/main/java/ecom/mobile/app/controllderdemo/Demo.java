@@ -10,7 +10,7 @@ public class Demo {
 
     @GetMapping("/test")
     public String test() {
-        return "siuuu Hello World";
+        return "Hello Ri do";
     }
 
     @GetMapping("/dtl")
