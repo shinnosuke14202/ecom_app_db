@@ -18,4 +18,7 @@ public class Demo {
         return "Hello Long";
     }
 
+    @GetMapping("/nmt")
+    public String thridTest() { return "Hello Tien"; }
+
 }
