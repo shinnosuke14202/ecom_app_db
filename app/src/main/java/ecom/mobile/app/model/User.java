@@ -47,4 +47,13 @@ public class User {
     )
     private UserSetting setting;
 
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "favorite_id"
+    )
+    private Favorite favorite;
+
 }
