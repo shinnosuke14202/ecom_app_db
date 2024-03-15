@@ -25,7 +25,7 @@ public class Product {
     private int rating;
     private int price;
 
-    private String type;
+    private int type;
 
     @Lob
     @Column(
