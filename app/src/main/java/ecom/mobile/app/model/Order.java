@@ -20,19 +20,22 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date createTime;
+    private String status;
+    private String address;
+    private String phoneNumber;
+    private String email;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL
     )
     private List<ItemOrder> itemOrders;
-    private String address;
-    private String phoneNumber;
-    private String email;
     @ManyToOne
     @JoinColumn(name = "ship_id")
     private Shipment shipment;
     @ManyToOne
     @JoinColumn(name = "pay_id")
     private Payment payment;
-
 }
