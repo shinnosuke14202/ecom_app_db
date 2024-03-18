@@ -21,6 +21,8 @@ public class Product {
 
     private String title;
     private String author;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private int rating;
     private int price;
