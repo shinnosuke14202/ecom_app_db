@@ -20,10 +20,10 @@ public interface ProductService {
 
     public List<Product> fetchProductsByType(int id);
 
-//    public List<Product> findProductsByCategoryName(List<String> categoryNames);
-
     public String deleteProductById(int id);
 
     public Product updateProduct(int id, String productString, MultipartFile image) throws IOException;
+
+    public List<Product> fetchProductsFilterByCategories(List<Integer> categoryIds, int listCount);
 
 }

@@ -4,6 +4,7 @@ import ecom.mobile.app.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,6 +16,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     public List<Product> findByTypeIs(int id);
 
-//    public List<Product> findByCategoryName(List<String> categoryNames);
+    @Query("SELECT p FROM Product p " +
+            "JOIN p.categories c " +
+            "WHERE c.id IN ?1 " +
+            "GROUP BY p " +
+            "HAVING COUNT(DISTINCT c) = ?2")
+    public List<Product> findProductsFilterByCategories(List<Integer> categoryIds, int listCount);
 
 }
