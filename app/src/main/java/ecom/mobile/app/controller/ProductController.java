@@ -49,24 +49,24 @@ public class ProductController {
         return productService.fetchProductById(id);
     }
 
-    @GetMapping("products/search/{keyword}")
+    @GetMapping("/products/search/{keyword}")
     public List<Product> searchProducts(@PathVariable("keyword") String keyword) {
         return productService.searchProducts(keyword);
     }
 
-    @GetMapping("products/type/{id}")
+    @GetMapping("/products/type/{id}")
     public List<Product> fetchProductsByType(@PathVariable("id") int id) {
         return productService.fetchProductsByType(id);
     }
 
-//    @GetMapping("/products/{categories}")
-//    public List<Product> getProductsByCategories(@RequestParam("categories") List<String> categoryNames) {
-//        return productService.findProductsByCategoryName(categoryNames);
-//    }
+    @GetMapping("/products/categories/{categoryIds}/{listCount}")
+    public List<Product> fetchProductsByCategories(@PathVariable("categoryIds") List<Integer> categoryIds, @PathVariable("listCount") int listCount) {
+        return productService.fetchProductsFilterByCategories(categoryIds, listCount);
+    }
 
     /////// DELETE ///////
 
-    @DeleteMapping("products/{id}")
+    @DeleteMapping("/products/{id}")
     public String deleteProductById(@PathVariable("id") int id) {
         return productService.deleteProductById(id);
     }

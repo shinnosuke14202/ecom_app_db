@@ -51,11 +51,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByTypeIs(id);
     }
 
-//    @Override
-//    public List<Product> findProductsByCategoryName(List<String> categoryNames) {
-//        return productRepository.findByCategoryName(categoryNames);
-//    }
-
     @Override
     public String deleteProductById(int id) {
         productRepository.deleteById(id);
@@ -105,5 +100,11 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.save(productDb);
     }
+
+    @Override
+    public List<Product> fetchProductsFilterByCategories(List<Integer> categoryIds, int listCount) {
+        return productRepository.findProductsFilterByCategories(categoryIds, listCount);
+    }
+
 
 }
