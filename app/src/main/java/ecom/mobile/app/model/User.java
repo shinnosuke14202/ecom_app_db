@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -47,13 +49,16 @@ public class User {
     )
     private UserSetting setting;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL
     )
-    @JoinColumn(
-            name = "favorite_id"
+    private List<Favorite> favoriteList;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL
     )
-    private Favorite favorite;
+    private List<Search> searchList;
 
 }
