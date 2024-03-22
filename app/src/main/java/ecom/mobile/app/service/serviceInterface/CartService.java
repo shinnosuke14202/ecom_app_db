@@ -13,6 +13,6 @@ public interface CartService {
 
     public void deleteCartById(int cid);
 
-    public void deleteCartByUid(int uid);
+    public void deleteCartByUserId(int uid);
 
 }

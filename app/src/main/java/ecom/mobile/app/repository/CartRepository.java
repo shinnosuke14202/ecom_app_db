@@ -22,7 +22,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM Cart c WHERE c.user.id=:uid")
-    void deleteCartByUid(int uid);
+    void deleteCartByUserId(int uid);
 
     Cart findByProductIdAndUserId(int productId, int userId);
 
