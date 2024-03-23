@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 public class SignUpRequest {
     private String name;
+    private String gender;
     private String email;
     private String password;
     @DateTimeFormat(pattern = "dd/MM/yyyy")

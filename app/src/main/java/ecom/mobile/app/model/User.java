@@ -22,6 +22,14 @@ public class User {
 
     private String name;
     private String phoneNumber;
+    private String gender;
+
+    @Lob
+    @Column(
+            name = "avatar_image",
+            columnDefinition = "MEDIUMBLOB"
+    )
+    private byte[] avatarImage;
 
     @OneToOne(
             cascade = CascadeType.ALL,

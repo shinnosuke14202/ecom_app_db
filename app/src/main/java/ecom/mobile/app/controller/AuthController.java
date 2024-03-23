@@ -1,9 +1,6 @@
 package ecom.mobile.app.controller;
 
-import ecom.mobile.app.model.Account;
-import ecom.mobile.app.model.ERole;
-import ecom.mobile.app.model.Role;
-import ecom.mobile.app.model.User;
+import ecom.mobile.app.model.*;
 import ecom.mobile.app.payload.request.LoginRequest;
 import ecom.mobile.app.payload.request.SignUpRequest;
 import ecom.mobile.app.payload.response.JwtResponse;
@@ -23,6 +20,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,12 +47,13 @@ public class AuthController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) throws Exception {
         if (accountService.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already"));
         }
         User user = new User();
         user.setName(signUpRequest.getName());
+        user.setGender(signUpRequest.getGender());
         Account account = new Account();
         account.setEmail(signUpRequest.getEmail());
         account.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
@@ -76,6 +79,22 @@ public class AuthController {
         }
         account.setRoles(listRole);
         user.setAccount(account);
+
+        UserSetting userSetting = new UserSetting();
+        userSetting.setEnableFingerPrint(0);
+        userSetting.setEnableNotification(0);
+        userSetting.setEnableLocationService(0);
+        user.setSetting(userSetting);
+
+        Address address = new Address();
+        address.setAddress("Chưa có địa chỉ");
+        user.setAddress(address);
+
+        String avtImageFileName = "_avt.jpg";
+        if(signUpRequest.getGender().equals("Nam")) avtImageFileName = "male" + avtImageFileName;
+        else avtImageFileName = "female" + avtImageFileName;
+        user.setAvatarImage(readImage(avtImageFileName));
+
         userService.saveOrUpdate(user);
         return ResponseEntity.ok(new MessageResponse("User register successfully"));
     }
@@ -106,4 +125,15 @@ public class AuthController {
         }
 
     }
+
+    private byte[] readImage(String fileName) throws Exception{
+        //local folder path
+        String folderPath = "B:\\document\\2-4\\MAD-14\\ecom_app_db\\ecom_app_db\\app\\src\\user_default_avatar\\";
+        String filePath = folderPath + fileName;
+        BufferedImage bImg = ImageIO.read(new File(filePath));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImg, "jpg", bos);
+        return bos.toByteArray();
+    }
+
 }
