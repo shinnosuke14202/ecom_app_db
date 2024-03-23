@@ -25,6 +25,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,10 +91,10 @@ public class AuthController {
         address.setAddress("Chưa có địa chỉ");
         user.setAddress(address);
 
-        String avtImageFileName = "_avt.jpg";
-        if(signUpRequest.getGender().equals("Nam")) avtImageFileName = "male" + avtImageFileName;
-        else avtImageFileName = "female" + avtImageFileName;
-        user.setAvatarImage(readImage(avtImageFileName));
+        String imgUrl = "";
+        if(signUpRequest.getGender().equals("Nam")) imgUrl = "https://raw.githubusercontent.com/shinnosuke14202/ecom_app_db/ba711c6627526f046f87f258df7bdc65ac483adb/app/src/user_default_avatar/male_avt.jpg";
+        else imgUrl = "https://raw.githubusercontent.com/shinnosuke14202/ecom_app_db/ba711c6627526f046f87f258df7bdc65ac483adb/app/src/user_default_avatar/female_avt.jpg";
+        user.setAvatarImage(readImage(imgUrl));
 
         userService.saveOrUpdate(user);
         return ResponseEntity.ok(new MessageResponse("User register successfully"));
@@ -126,11 +127,9 @@ public class AuthController {
 
     }
 
-    private byte[] readImage(String fileName) throws Exception{
-        //local folder path
-        String folderPath = "B:\\document\\2-4\\MAD-14\\ecom_app_db\\ecom_app_db\\app\\src\\user_default_avatar\\";
-        String filePath = folderPath + fileName;
-        BufferedImage bImg = ImageIO.read(new File(filePath));
+    private byte[] readImage(String url) throws Exception{
+        URL imgUrl = new URL(url);
+        BufferedImage bImg = ImageIO.read(imgUrl);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bImg, "jpg", bos);
         return bos.toByteArray();
