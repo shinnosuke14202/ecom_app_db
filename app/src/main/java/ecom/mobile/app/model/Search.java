@@ -12,20 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class Favorite {
+public class Search {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JsonBackReference
-    private Product product;
+    private String searchResult;
 
     @ManyToOne
-    @JoinColumn(
-            name = "user_id"
-    )
+    @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
 

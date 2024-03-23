@@ -1,10 +1,13 @@
 package ecom.mobile.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -15,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
     private String phoneNumber;
@@ -30,8 +33,7 @@ public class User {
     private Address address;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "account_id"
@@ -47,13 +49,16 @@ public class User {
     )
     private UserSetting setting;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL
     )
-    @JoinColumn(
-            name = "favorite_id"
+    private List<Favorite> favoriteList;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL
     )
-    private Favorite favorite;
+    private List<Search> searchList;
 
 }
