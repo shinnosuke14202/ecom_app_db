@@ -92,8 +92,8 @@ public class AuthController {
         user.setAddress(address);
 
         String imgUrl = "";
-        if(signUpRequest.getGender().equals("Nam")) imgUrl = "https://raw.githubusercontent.com/shinnosuke14202/ecom_app_db/ba711c6627526f046f87f258df7bdc65ac483adb/app/src/user_default_avatar/male_avt.jpg";
-        else imgUrl = "https://raw.githubusercontent.com/shinnosuke14202/ecom_app_db/ba711c6627526f046f87f258df7bdc65ac483adb/app/src/user_default_avatar/female_avt.jpg";
+        if(signUpRequest.getGender().equals("Nam")) imgUrl = "https://i.ibb.co/RQ5XmFL/male-avt.jpg";
+        else imgUrl = "https://i.ibb.co/x7vVWPs/female-avt.jpg";
         user.setAvatarImage(readImage(imgUrl));
 
         userService.saveOrUpdate(user);
