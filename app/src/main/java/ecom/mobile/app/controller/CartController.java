@@ -33,6 +33,7 @@ public class CartController {
         User currentUser = getUserRequest();
         User userCart = new User();
         userCart.setId(currentUser.getId());
+        cart.setUser(userCart);
         return cartService.addCart(cart);
     }
 

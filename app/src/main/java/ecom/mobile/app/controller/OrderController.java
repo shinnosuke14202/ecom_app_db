@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public List<Order> getOrdersByUserAndStatus(@RequestBody String status) {
+    public List<Order> getOrdersByUserAndStatus(@RequestParam("status") String status) {
         return orderService.getOrdersByUserIdAndStatus(
                 getUserRequest().getId(),
                 status
@@ -51,7 +51,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/search")
-    public List<Order> getOrdersByUserAndProductName(@RequestBody String productName) {
+    public List<Order> getOrdersByUserAndProductName(@RequestParam("key") String productName) {
         return orderService.getOrderByUserIdAndProductName(
                 getUserRequest().getId(),
                 productName
