@@ -32,10 +32,14 @@ public class Order {
             cascade = CascadeType.ALL
     )
     private List<ItemOrder> itemOrders;
-    @ManyToOne
+    @OneToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "ship_id")
     private Shipment shipment;
-    @ManyToOne
+    @OneToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "pay_id")
     private Payment payment;
 }

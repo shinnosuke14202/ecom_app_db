@@ -32,8 +32,7 @@ public class User {
     private byte[] avatarImage;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "address_id"
@@ -49,8 +48,7 @@ public class User {
     private Account account;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "setting_id"

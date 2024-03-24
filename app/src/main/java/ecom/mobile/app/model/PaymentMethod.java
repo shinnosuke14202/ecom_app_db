@@ -11,17 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "shipment")
-public class Shipment {
-
+@Table(name = "payment_method")
+public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String code;
-    private String shipStatus;
-    @ManyToOne
-    @JoinColumn(name = "shipment_method_id")
-    private ShipmentMethod shipmentMethod;
-
-
+    private String name;
 }

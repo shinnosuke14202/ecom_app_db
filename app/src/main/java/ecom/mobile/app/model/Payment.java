@@ -13,14 +13,17 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "payments")
+@Table(name = "payment")
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private int totalPrice;
-    private Date date;
+    private String payStatus;
+    @ManyToOne
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
+
 
 }
