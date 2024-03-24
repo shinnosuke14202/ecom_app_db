@@ -6,6 +6,7 @@ import ecom.mobile.app.service.serviceInterface.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrdersByUserId(int uid) {
-        return orderRepository.getOrdersByUserId(uid);
+        return orderRepository.getOrdersByUserId(uid).orElse(new ArrayList<>());
+    }
+
+    @Override
+    public List<Order> getOrdersByUserIdAndStatus(int uid, String status) {
+        return orderRepository.findByUserIdAndStatus(uid, status).orElse(new ArrayList<>());
+    }
+
+    @Override
+    public List<Order> getOrderByUserIdAndProductName(int uid, String productName) {
+        return orderRepository.getOrderByUserIdAndProductName(uid, productName);
+    }
+
+    @Override
+    public Order getOrderById(int oid) {
+        return orderRepository.findById(oid).orElse(new Order());
     }
 
     @Override

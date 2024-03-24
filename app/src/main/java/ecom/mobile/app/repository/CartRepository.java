@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
-    @Query(value = "SELECT c FROM Cart c where c.user.id=:uid")
+    @Query(value = "SELECT c FROM Cart c WHERE c.user.id=:uid")
     List<Cart> getCartsByUserId(int uid);
 
     @Modifying
