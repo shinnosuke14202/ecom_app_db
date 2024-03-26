@@ -26,4 +26,6 @@ public interface ProductService {
 
     public List<Product> fetchProductsFilterByCategories(List<Integer> categoryIds, int listCount);
 
+    public List<Product> fetchProductsByTypeWithSize(int id, int quantity);
+
 }

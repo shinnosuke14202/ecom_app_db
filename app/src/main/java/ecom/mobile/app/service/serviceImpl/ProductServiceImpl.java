@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ecom.mobile.app.model.Product;
 import ecom.mobile.app.repository.ProductRepository;
 import ecom.mobile.app.service.serviceInterface.ProductService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -104,6 +106,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> fetchProductsFilterByCategories(List<Integer> categoryIds, int listCount) {
         return productRepository.findProductsFilterByCategories(categoryIds, listCount);
+    }
+
+    @Override
+    public List<Product> fetchProductsByTypeWithSize(int id, int quantity) {
+        return productRepository.fetchProductsByTypeWithSize(id, quantity);
     }
 
 }

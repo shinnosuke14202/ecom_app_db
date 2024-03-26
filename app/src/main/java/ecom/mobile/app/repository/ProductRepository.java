@@ -23,4 +23,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "HAVING COUNT(DISTINCT c) = ?2")
     public List<Product> findProductsFilterByCategories(List<Integer> categoryIds, int listCount);
 
+    @Query(
+            value = "SELECT * from product p WHERE p.type = ?1 LIMIT ?2",
+            nativeQuery = true
+    )
+    public List<Product> fetchProductsByTypeWithSize(int id, int quantity);
+
 }
