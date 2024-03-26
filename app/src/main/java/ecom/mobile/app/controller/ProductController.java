@@ -64,6 +64,11 @@ public class ProductController {
         return productService.fetchProductsFilterByCategories(categoryIds, listCount);
     }
 
+    @GetMapping("/products/type/{id}/{quantity}")
+    public List<Product> fetchProductsByTypeWithSize(@PathVariable("id") int id, @PathVariable("quantity") int quantity) {
+        return productService.fetchProductsByTypeWithSize(id, quantity);
+    }
+
     /////// DELETE ///////
 
     @DeleteMapping("/products/{id}")
